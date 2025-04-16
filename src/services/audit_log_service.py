@@ -11,5 +11,9 @@ class AuditLogService:
     def find_all(self):
         return self.audit_log_repository.find_all()
 
+    def create(self, audit_log: AuditLog) -> AuditLog:
+        
+        return self.audit_log_repository.create(audit_log)
+
     def find_by_id(self, audit_log_id: UUID):
         return self.audit_log_repository.find_by_id(audit_log_id)

@@ -9,5 +9,8 @@ class ExecutionLogService:
     def find_all(self) -> list[ExecutionLog]:
         return self.repository.find_all()
 
+    def create(self, execution_log: ExecutionLog) -> ExecutionLog:
+        return self.repository.create(execution_log)
+
     def find_by_id(self, uuid: str) -> ExecutionLog:
         return self.repository.find_by_id(uuid)

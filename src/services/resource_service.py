@@ -12,3 +12,6 @@ class ResourceService:
 
     def find_by_id(self, id: UUID) -> Resource:
         return self.resource_repository.find_by_id(id)
+    
+    def create(self, resource: Resource) -> Resource:
+        return self.resource_repository.create(resource)

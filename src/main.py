@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from starlette.middleware import Middleware
+from sqlalchemy.orm import configure_mappers
 from src.interceptors.base_interceptor import ExceptionInterceptor
 from src.controllers.provision_request_controller import ProvisionRequestController
 from src.controllers.audit_log_controller import AuditLogController
@@ -16,11 +17,21 @@ from src.repositories.worker_repository import WorkerRepository
 from src.repositories.user_repository import UserRepository
 from sqlalchemy.orm import Session
 import threading
+from src.entities.user import User
+from src.entities.worker import Worker
+from src.entities.template_definition import TemplateDefinition
+from src.entities.resource import Resource
+from src.entities.provision_request import ProvisionRequest
+from src.entities.resource_dependency import ResourceDependency
+from src.entities.execution_log import ExecutionLog
+from src.entities.audit_log import AuditLog
 
 app = FastAPI(middleware=[Middleware(ExceptionInterceptor)])
 
 
 
+
+configure_mappers()
 
 def get_session():
     db: Session = next(get_db(engine))

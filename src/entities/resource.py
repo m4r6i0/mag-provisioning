@@ -21,5 +21,3 @@ class Resource(Base):
     status = Column(Enum(ResourceStatus), nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
-
-    provision_request = relationship("ProvisionRequest", back_populates="resources")

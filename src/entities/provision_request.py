@@ -23,6 +23,3 @@ class ProvisionRequest(Base):
     parameters = Column(JSONB, nullable=False)
     worker_id = Column(UUID(as_uuid=True), ForeignKey("workers.uuid"))
     last_update = Column(DateTime, nullable=False)
-
-    user = relationship("User", back_populates="provision_requests")
-    worker = relationship("Worker", back_populates="provision_requests")

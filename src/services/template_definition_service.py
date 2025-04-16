@@ -7,10 +7,13 @@ from uuid import UUID
 
 class TemplateDefinitionService:
     def __init__(self, session: Session):
-        self.repository: TemplateDefinitionRepository = TemplateDefinitionRepository(session)
+        self.template_definition_repository: TemplateDefinitionRepository = TemplateDefinitionRepository(session)
 
     def find_all(self) -> List[TemplateDefinition]:
-        return self.repository.find_all()
+        return self.template_definition_repository.find_all()
 
     def find_by_id(self, uuid: UUID) -> TemplateDefinition:
-        return self.repository.find_by_id(uuid)
+        return self.template_definition_repository.find_by_id(uuid)
+    
+    def create(self, template_definition: TemplateDefinition):
+        return self.template_definition_repository.create(template_definition)
