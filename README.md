@@ -1,10 +1,27 @@
-# Flask API Service Starter
+# API de Provisionamento
 
-This is a minimal Flask API service starter based on [Google Cloud Run Quickstart](https://cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-python-service).
+## Descrição
 
-## Getting Started
+Esta é uma API para provisionamento de recursos, permitindo a criação, gerenciamento e monitoramento de requisições de provisionamento. Ela utiliza uma arquitetura baseada em microsserviços, com componentes principais como FastAPI, SQLAlchemy e RabbitMQ.
 
-Server should run automatically when starting a workspace. To run manually, run:
+## Pré-requisitos
+
+Para executar esta API, você precisará ter os seguintes componentes instalados e configurados em seu ambiente:
+
+*   **Python 3.11:** A linguagem de programação utilizada para a API.
+*   **Pip:** O gerenciador de pacotes do Python.
+*   **PostgreSQL:** O banco de dados relacional utilizado para persistir os dados.
+*   **RabbitMQ:** O message broker utilizado para comunicação assíncrona.
+*   **Docker:** Para construir e executar a API em um container.
+*   **Helm:** Para gerenciar a implantação em Kubernetes.
+*   **Minikube (Opcional):** Para executar um cluster Kubernetes localmente.
+*   **Nix (Opcional):** Para executar a API localmente.
+
+## Instalação
+
+1.  **Clonar o Repositório:**
+
+    
 ```sh
 ./devserver.sh
 ```
