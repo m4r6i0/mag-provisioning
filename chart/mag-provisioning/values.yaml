@@ -1,0 +1,10 @@
+replicaCount: 1
+
+image:
+  repository: mag-provisioning
+  pullPolicy: IfNotPresent
+  tag: latest
+
+service:
+  port: 8000
+  type: ClusterIP
