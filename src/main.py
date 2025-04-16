@@ -6,13 +6,20 @@ from src.controllers.audit_log_controller import AuditLogController
 from src.controllers.resource_controller import ResourceController
 from src.controllers.template_definition_controller import TemplateDefinitionController
 from src.controllers.execution_log_controller import ExecutionLogController
-from src.infrastructure.database import get_db, engine
+from src.infrastructure.database import engine, get_db
 from src.services.provision_request_service import ProvisionRequestService
 from src.repositories.provision_request_repository import ProvisionRequestRepository
+from src.repositories.template_definition_repository import TemplateDefinitionRepository
+from src.repositories.resource_repository import ResourceRepository
+from src.repositories.resource_dependency_repository import ResourceDependencyRepository
+from src.repositories.worker_repository import WorkerRepository
+from src.repositories.user_repository import UserRepository
 from sqlalchemy.orm import Session
 import threading
 
 app = FastAPI(middleware=[Middleware(ExceptionInterceptor)])
+
+
 
 
 def get_session():
@@ -35,10 +42,21 @@ app.include_router(execution_log_controller.router)
 
 
 def start_rabbitmq_consumer():
-    session = get_session()
-    provision_request_repository = ProvisionRequestRepository(session)
+    db: Session = next(get_db(engine))
+    provision_request_repository = ProvisionRequestRepository(db)
+    template_definition_repository = TemplateDefinitionRepository(db)
+    resource_repository = ResourceRepository(db)
+    resource_dependency_repository = ResourceDependencyRepository(db)
+    worker_repository = WorkerRepository(db)
+    user_repository = UserRepository(db)
     provision_request_service = ProvisionRequestService(
-        provision_request_repository, session
+        provision_request_repository,
+        template_definition_repository,
+        resource_repository,
+        resource_dependency_repository,
+        worker_repository,
+        user_repository,
+        db,
     )
     provision_request_service.listen_rabbitmq()
 

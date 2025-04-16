@@ -1,13 +1,13 @@
 from sqlalchemy.orm import Session
 from src.entities.user import User
-from uuid import UUID
+
 
 
 class UserRepository:
     def __init__(self, session: Session):
         self.session = session
 
-    def find_by_id(self, user_id: UUID) -> User | None:
+    def find_by_id(self, user_id: str) -> User | None:
         return self.session.query(User).filter(User.uuid == user_id).first()
 
     def find_all(self) -> list[User]:
@@ -27,3 +27,6 @@ class UserRepository:
     def delete(self, user: User):
         self.session.delete(user)
         self.session.commit()
+
+    def find_by_name(self, user_name: str) -> User | None:
+        return self.session.query(User).filter(User.name == user_name).first()

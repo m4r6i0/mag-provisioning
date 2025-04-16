@@ -1,13 +1,13 @@
 from sqlalchemy.orm import Session
 from src.entities.template_definition import TemplateDefinition
-from uuid import UUID
+from uuid import UUID, uuid4
 
 
 class TemplateDefinitionRepository:
     def __init__(self, session: Session):
         self.session = session
 
-    def find_by_id(self, uuid: UUID) -> TemplateDefinition | None:
+    def find_by_id(self, uuid: str) -> TemplateDefinition | None:
         return self.session.query(TemplateDefinition).filter(TemplateDefinition.uuid == uuid).first()
 
     def find_all(self) -> list[TemplateDefinition]:
