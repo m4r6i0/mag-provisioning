@@ -1,1 +1,5 @@
-.venv
+diff
+--- a/.gitignore
++++ b/.gitignore
+@@ -0,0 +1,1 @@
++.env
