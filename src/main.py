@@ -60,7 +60,7 @@ def start_rabbitmq_consumer():
     resource_dependency_repository = ResourceDependencyRepository(db)
     worker_repository = WorkerRepository(db)
     user_repository = UserRepository(db)
-    provision_request_service = ProvisionRequestService(
+    provision_request_service = ProvisionRequestService(\
         provision_request_repository,
         template_definition_repository,
         resource_repository,
